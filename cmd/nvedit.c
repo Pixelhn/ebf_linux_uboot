@@ -1339,6 +1339,8 @@ static int do_env_exists(struct cmd_tbl *cmdtp, int flag, int argc,
 }
 #endif
 
+//新旧--操作环境变量相关的命令
+
 /*
  * New command line interface: "env" command with subcommands
  */

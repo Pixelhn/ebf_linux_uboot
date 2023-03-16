@@ -47,6 +47,7 @@
 
 #define CONFIG_SYS_MMC_IMG_LOAD_PART	1
 
+#if 0
 #if defined(CONFIG_SYS_BOOT_NAND)
 #define CONFIG_EXTRA_ENV_SETTINGS \
 	"panel=TFT50AB\0" \
@@ -196,6 +197,7 @@
 			"bootz 0x80800000 0x88000000:${filesize} 0x83000000;"	\
 		"fi;\0" \
 	BOOTENV
+
 /*
 #define CONFIG_BOOTCOMMAND \
 	   "run findfdt;" \
@@ -211,6 +213,19 @@
 		   "fi; " \
 	   "else run netboot; fi"
 */
+#endif
+
+#else
+
+#define CONFIG_EXTRA_ENV_SETTINGS "bootcmd=setenv devtype mmc;"\
+	"setenv mmcdev 0;" \
+	"setenv bootpart 0:1;" \
+	"setenv rootfpart 1:2;" \
+	"setenv bootargs console=ttymxc0 root=/dev/mmcblk1p2 rw rootfstype=ext4 rootwait;" \
+	"load ${devtype} ${bootpart} 0x80800000 /zImage;"\
+	"load ${devtype} ${bootpart} 0x83000000 /imx6ull-mmc-npi.dtb;" \
+	"bootz 0x80800000 - 0x83000000;\0"
+
 #endif
 
 /* Miscellaneous configurable options */
@@ -263,6 +278,15 @@
 	func(LEGACY_MMC, mmc, 0) \
 	func(LEGACY_MMC, mmc, 1) \
 
+#if 1
+
+#ifndef CONFIG_BOOTCOMMAND
+#define CONFIG_BOOTCOMMAND "echo OK!"
+#endif
+
+#else
+
 #include <config_distro_bootcmd.h>
 
+#endif
 #endif
