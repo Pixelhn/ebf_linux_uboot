@@ -85,7 +85,7 @@ static inline s64 mmc_offset(int copy)
 			return val;
 	}
 
-	defvalue = CONFIG_ENV_OFFSET;
+	defvalue = CONFIG_ENV_OFFSET;//env在mmc中的偏移
 	propname = dt_prop.offset;
 
 #if defined(CONFIG_ENV_OFFSET_REDUND)
