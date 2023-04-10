@@ -217,11 +217,11 @@
 
 #else
 
-#define CONFIG_EXTRA_ENV_SETTINGS "bootcmd=setenv devtype mmc;"\
+#define CONFIG_EXTRA_ENV_SETTINGS "fat_boot=setenv devtype mmc;"\
 	"setenv mmcdev 0;" \
-	"setenv bootpart 0:1;" \
-	"setenv rootfpart 1:2;" \
-	"setenv bootargs console=ttymxc0 root=/dev/mmcblk1p2 rw rootfstype=ext4 rootwait;" \
+	"setenv bootpart 0:2;" \
+	"setenv rootfpart 0:3;" \
+	"setenv bootargs console=ttymxc0 root=/dev/mmcblk0p3 rw rootfstype=ext4 rootwait;" \
 	"load ${devtype} ${bootpart} 0x80800000 /zImage;"\
 	"load ${devtype} ${bootpart} 0x83000000 /imx6ull-mmc-npi.dtb;" \
 	"bootz 0x80800000 - 0x83000000;\0"
@@ -281,7 +281,7 @@
 #if 1
 
 #ifndef CONFIG_BOOTCOMMAND
-#define CONFIG_BOOTCOMMAND "echo OK!"
+#define CONFIG_BOOTCOMMAND "run fat_boot"
 #endif
 
 #else
