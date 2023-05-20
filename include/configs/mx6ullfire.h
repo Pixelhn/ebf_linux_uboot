@@ -220,10 +220,10 @@
 #define CONFIG_EXTRA_ENV_SETTINGS "fat_boot=setenv devtype mmc;"\
 	"setenv mmcdev 0;" \
 	"setenv bootpart 0:2;" \
-	"setenv rootfpart 0:3;" \
-	"setenv bootargs console=ttymxc0 root=/dev/mmcblk0p3 rw rootfstype=ext4 rootwait;" \
-	"load ${devtype} ${bootpart} 0x80800000 /zImage;"\
-	"load ${devtype} ${bootpart} 0x83000000 /imx6ull-mmc-npi.dtb;" \
+	"setenv rootfpart 1:3;" \
+	"setenv bootargs console=ttymxc0 root=/dev/mmcblk1p3 rw rootfstype=ext4 rootwait;" \
+	"load ${devtype} ${bootpart} 0x80800000 /boot/zImage;"\
+	"load ${devtype} ${bootpart} 0x83000000 /boot/imx6ull-mmc-npi.dtb;" \
 	"bootz 0x80800000 - 0x83000000;\0"
 
 #endif
