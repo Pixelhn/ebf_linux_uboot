@@ -217,13 +217,20 @@
 
 #else
 
-#define CONFIG_EXTRA_ENV_SETTINGS "fat_boot=setenv devtype mmc;"\
+#define CONFIG_EXTRA_ENV_SETTINGS \
+	"init_boot_dev=setenv devtype mmc;" \
 	"setenv mmcdev 0;" \
-	"setenv bootpart 0:2;" \
-	"setenv rootfpart 1:3;" \
+	"setenv bootpart 0:2;\0" \
+	\
+	"fat_boot=run init_boot_dev;"\
 	"load ${devtype} ${bootpart} 0x80800000 /boot/zImage;"\
 	"load ${devtype} ${bootpart} 0x83000000 /boot/imx6ull-mmc-npi.dtb;" \
-	"bootz 0x80800000 - 0x83000000;\0"
+	"bootz 0x80800000 - 0x83000000;\0" \
+	\
+	"fit_boot=run init_boot_dev" \
+	"load ${devtype} ${bootpart} ${loadaddr} /boot.itb;"\
+	"iminfo;" \
+	"bootm;\0"
 
 #endif
 
